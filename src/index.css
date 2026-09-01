@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-base font-sans text-fg antialiased;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* grain: fixed, pointer-events-none, never on a scrolling container (perf) */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-sans;
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid #7bf0bd;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: rgba(74, 222, 158, 0.25);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar { width: 9px; height: 9px; }
+  ::-webkit-scrollbar-track { background: #0b0e11; }
+  ::-webkit-scrollbar-thumb { background: #1e252b; }
+  ::-webkit-scrollbar-thumb:hover { background: #2c353d; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .frame {
+    @apply mx-auto w-full max-w-frame px-4 sm:px-6 lg:px-10;
+  }
+
+  .mono-tag {
+    @apply font-mono text-2xs uppercase tracking-[0.14em] text-fg-low;
+  }
+
+  .panel {
+    @apply relative border border-line bg-base-1;
+  }
+
+  /* systemic z-index scale */
+  .z-nav { z-index: 40; }
+  .z-overlay { z-index: 70; }
+  .z-grain { z-index: 90; }
+
+  .btn {
+    @apply relative inline-flex min-h-[44px] select-none items-center justify-center gap-2 rounded
+      px-5 font-mono text-xs font-medium uppercase tracking-[0.1em] transition-transform duration-150 ease-out
+      active:scale-[0.98];
+  }
+  .btn-primary {
+    @apply btn bg-signal text-base hover:bg-signal-bright;
+  }
+  .btn-ghost {
+    @apply btn border border-line-2 bg-transparent text-fg hover:border-signal hover:text-signal-bright;
+  }
+
+  .data-fig {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    @apply font-mono;
+  }
+
+  .rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #2c353d 12%, #2c353d 88%, transparent);
+  }
+}
