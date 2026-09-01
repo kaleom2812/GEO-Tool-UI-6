@@ -5,7 +5,7 @@ import { meta, score, executiveSummary } from "../data/auditData.js";
 import { ScoreCore } from "../charts.jsx";
 import { Chip } from "../ui.jsx";
 import { Reveal } from "../motion/primitives.jsx";
-import { Printer, ArrowLeft } from "../icons.jsx";
+import { Printer, ArrowLeft, House } from "../icons.jsx";
 import { Footer } from "../screens/Chrome.jsx";
 import { REPORT_SECTIONS } from "./sections.jsx";
 import Decrypt from "./Decrypt.jsx";
@@ -45,6 +45,9 @@ export default function Report({ onExitToPreview }) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="font-mono text-2xs uppercase tracking-[0.16em] text-signal">Full readout / {meta.auditId}</p>
         <div className="flex gap-2">
+          <button type="button" onClick={restart} className="btn-ghost h-9 px-3 text-2xs">
+            <House size={13} /> Home
+          </button>
           <button type="button" onClick={() => window.print()} className="btn-ghost h-9 px-3 text-2xs">
             <Printer size={13} /> Export
           </button>
